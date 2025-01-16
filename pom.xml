@@ -72,6 +72,17 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <base.url>https://petstore.swagger.io/v2</base.url>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -81,7 +92,7 @@
                 <version>${surefirePlugin.ver}</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <browser>chrome</browser>
+                        <base.url>${base.url}</base.url>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

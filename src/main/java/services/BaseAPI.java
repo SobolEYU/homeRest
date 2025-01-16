@@ -7,7 +7,7 @@ import io.restassured.specification.RequestSpecification;
 
 public abstract class BaseAPI {
 
-    protected static final String BASE_URL = "https://petstore.swagger.io/v2";
+    protected static final String BASE_URL = System.getProperty("base.url");
 
     protected RequestSpecification baseSpec;
 
