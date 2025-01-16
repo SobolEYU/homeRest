@@ -24,6 +24,7 @@
         <lombok.ver>1.18.36</lombok.ver>
         <rest.ver>5.5.0</rest.ver>
         <guice.ver>7.0.0</guice.ver>
+        <javafaker.ver>1.0.2</javafaker.ver>
     </properties>
 
     <dependencies>
@@ -63,6 +64,12 @@
             <artifactId>guice</artifactId>
             <version>${guice.ver}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.ver}</version>
+        </dependency>
+
     </dependencies>
 
 

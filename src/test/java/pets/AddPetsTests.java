@@ -3,6 +3,7 @@ package pets;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import com.github.javafaker.Faker;
 import com.google.inject.Inject;
 import dto.BaseResponseDTO;
 import dto.PetsDTO;
@@ -16,10 +17,12 @@ import services.PetsApi;
 @ExtendWith(BaseExtensions.class)
 public class AddPetsTests {
 
+    Faker faker = new Faker();
+
     @Inject
     private PetsApi petsApi;
     
-    private static ArrayList<Long> addedPets = new ArrayList<>();
+    private ArrayList<Long> addedPets = new ArrayList<>();
 
     //метод ADD отрабатывает успешно и в ответ присылает присвоенный id питомца
     @Test
@@ -29,8 +32,8 @@ public class AddPetsTests {
         PetsDTO response = petsApi.addPet(pet).extract().body().as(PetsDTO.class);
         addedPets.add(response.getId());
         assertAll("Получаем данные переданные при создании + id",
-                () -> assertEquals("Baton", response.getName()),
-                () -> assertEquals("доступен", response.getStatus()),
+                () -> assertEquals(pet.getName(), response.getName()),
+                () -> assertEquals(pet.getStatus(), response.getStatus()),
                 () -> assertNotNull(response.getId())
         );
     }
@@ -44,8 +47,8 @@ public class AddPetsTests {
         addedPets.add(responseAdd.getId());
         PetsDTO responseGet = petsApi.getPetById(responseAdd.getId()).extract().body().as(PetsDTO.class);
         assertAll("Получаем то же, что и при создании питомца",
-                () -> assertEquals("Baton", responseGet.getName()),
-                () -> assertEquals("доступен", responseGet.getStatus()),
+                () -> assertEquals(pet.getName(), responseGet.getName()),
+                () -> assertEquals(pet.getStatus(), responseGet.getStatus()),
                 () -> assertEquals(responseAdd.getId(), responseGet.getId())
         );
     }
@@ -77,8 +80,8 @@ public class AddPetsTests {
         petsApi.updatePet(pet);
         PetsDTO responseGet = petsApi.getPetById(responseAdd.getId()).extract().body().as(PetsDTO.class);
         assertAll("Получаем то же, что и при создании питомца",
-                () -> assertEquals("Baton", responseGet.getName()),
-                () -> assertEquals("не доступен", responseGet.getStatus()),
+                () -> assertEquals(pet.getName(), responseGet.getName()),
+                () -> assertEquals(pet.getStatus(), responseGet.getStatus()),
                 () -> assertEquals(responseAdd.getId(), responseGet.getId())
         );
     }
@@ -91,7 +94,7 @@ public class AddPetsTests {
     private PetsDTO getPet() {
         return PetsDTO
                 .builder()
-                .name("Baton")
+                .name(faker.name().firstName())
                 .status("доступен")
                 .build();
     }
