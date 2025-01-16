@@ -23,6 +23,7 @@
         <jacksonMapper.ver>1.9.13</jacksonMapper.ver>
         <lombok.ver>1.18.36</lombok.ver>
         <rest.ver>5.5.0</rest.ver>
+        <guice.ver>7.0.0</guice.ver>
     </properties>
 
     <dependencies>
@@ -56,6 +57,11 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
             <version>4.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice.ver}</version>
         </dependency>
     </dependencies>
 
